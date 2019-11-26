@@ -42,6 +42,9 @@ from create_controldict import *
 from runner import *
 from compute_coordinates import *
 """
+import argument_processor
+
+from argument_processor import arg_process
 
 def main():
     """ Main script"""
