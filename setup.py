@@ -15,7 +15,7 @@ setup(
       version='0.0.0',
       description='Biomass cookstove optimization package',
       author='Liam Cassidy',
-	  url='https://github.com/Liam-Cassidy/StoveOpt',
+	  url='https://github.com/Liam-Cassidy/BMCS_CFD_Opt',
       author_email='cassidyl@oregonstate.edu',
       classifiers=[
               'License :: OSI Approved :: BSD License',
@@ -28,7 +28,7 @@ setup(
       zip_safe=False,
       packages=setuptools.find_packages(),
       
-	  package_dir={'StoveOpt': 'StoveOpt',
+	  package_dir={'BMCS_CFD_Opt': 'BMCS_CFD_Opt',
 	  },
 	  include_package_data=True,		
       )
