@@ -2,9 +2,9 @@ name: test-environment
 channels:
 - defaults
 dependencies:
-- python=${PYTHON}
-- numpy>=1.12.0
-- pytest>=3.2.0
-- pytest-cov
+    - python=${PYTHON}
+    - numpy>=1.12.0
+    - pytest>=3.2.0
+    - pytest-cov
 
 
