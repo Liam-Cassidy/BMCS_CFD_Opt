@@ -1,6 +1,6 @@
-name: test-environment
+name: py${PYTHON}
 channels:
-- defaults
+ - defaults
 dependencies:
     - python=${PYTHON}
     - numpy>=1.12.0
