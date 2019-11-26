@@ -1,6 +1,6 @@
 # BMCS_CFD_Opt
 The package runs a number of steady state CFD simulations with a varying parameter specifice by user
-```[![Build Status](https://travis-ci.org/Liam-Cassidy/StoveOpt.png)](https://travis-ci.org/Liam-Cassidy/StoveOpt)"""
+[![Build Status](https://travis-ci.org/Liam-Cassidy/BMCS_CFD_Opt.svg?branch=master)](https://travis-ci.org/Liam-Cassidy/BMCS_CFD_Opt)
 
 
 ## Documentation
