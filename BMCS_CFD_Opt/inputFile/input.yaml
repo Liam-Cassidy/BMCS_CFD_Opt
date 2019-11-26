@@ -1,0 +1,37 @@
+case:
+# Usage:
+#
+
+        # Design field:
+        number_of_cases: 20 #
+        lower_design_value: # [TBD]
+        upper_design_value: # [TBD]
+
+
+        # Wood definitition:
+        Dimension_square_wood:  0.02 # m
+        Lower_heating_value: #
+
+        # Secondary air flow definitions
+        Secondary_air_flow_rate: 16 # m^3/s
+        Diameter_secondary_inlet: 0.01 # m
+        Height_secondary_inlet: 0.1 # m
+
+        # Stove Geometry Definitions
+        Combustion_chamber_diameter: 0.15 # m
+        Combustion_chamber_height: 0.3 # m
+        Channel_width: 0.03 # m
+        Channel_height: 0.1 # m
+        Height_cone_deck: 0.15 # m
+        Length_cone_deck: 0.07 # m
+        Pot_spacing: 0.03 #
+
+        # CFD definitions
+        Maximum_grid_spacing: 0.025 # m
+        Start_time: 0 # s
+        End_Time: 1000 # s
+        Time_step: 0.01 # s -- maximum 0.00001
+        Write_interval: 0.1 # s
+        Write_format: ascii
+        maxCo: 0.4
+        OS: Linux
