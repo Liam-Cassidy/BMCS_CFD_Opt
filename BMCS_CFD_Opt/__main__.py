@@ -19,6 +19,9 @@ import yaml
 import time
 from time import sleep
 
+# boundary condition imports:
+from boundary_conditions import calculate_fuel_mass_flow
+
 """
 import import_geometry
 import create_blockmeshfile
@@ -57,6 +60,27 @@ def main():
     parser.add_argument('-i','--inputfile', required=True, help='Please enter the full file path (directory and filename.extension) in Linux format for the input.yaml file in LINUX format. For example, /mnt/c/Oregon_State/Spring_2019/Soft_dev_eng/StoveOpt/StoveOpt/inputFiles/input.yaml')
     import sys
     args = parser.parse_args(sys.argv[1:])
+
+
+    # Compute boundary conditions:
+    m_dot_fuel_total = calculate_fuel_mass_flow(firepower, LHV) # fuel mass flow rate (kg/s)
+    
+
+
+    # Build the matrix for the cases
+    # Col 1 is the case number, col 2 is secondary flow rates, and col 3 is the angles for the secondary inlet
+
+
+    # Create X number of results matrices: col 1 is case number, col 2 is the secondary flow rate, col 3 is the secondary angle, col 4 is the respective dependent variable being tracked
+
+
+    # Create a geometry and mesh --> pull this entirely from the previous work, woohoo!
+
+
+    # loop through the simulations, pull data from the post processing of the case, place values iteratively in the CORRECT results matrix col 4
+
+
+    # plot results in matlplotlib
 
 
 

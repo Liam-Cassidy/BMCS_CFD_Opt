@@ -4,7 +4,7 @@ The package runs a number of steady state CFD simulations with a varying paramet
 
 
 ## Documentation
-The documentation for the StoveOpt software is available at: <https://liam-cassidy.github.io/BMCS_CFD_Opt/>
+The documentation for the BMCS_CFD_Opt software is available at: <https://liam-cassidy.github.io/BMCS_CFD_Opt/>
 
 ## Installation
 The BMCS_CFD_Opt software package can be installed via pip from PyPI, as follows:
@@ -16,13 +16,9 @@ The BMCS_CFD_Opt software package can be installed via pip from PyPI, as follows
 In order to excecute the software, following the installation step, the user should navigate to the directory where the package input file included; this will be where the package is installed, for example, enter on the command line:
 
 
-Once the user reaches the working directory of the package, the user should edit the input file his should /StoveOpt/inputFiles/ directory. Within the directory, the user should edit the input.yaml file to include the path and filename of the input stove geometry.
-For example: 
-geometry_file_directory: C:\Users\Lee\Anaconda3\Lib\site-packages\StoveOpt\stovegeom
-geometry_file_name: Stove_Geometry.xlsx
+LIAM ENTER IN THE FIRST STEP TO RUN (I NAVIGATE TO A SPECIFIC FOLDER?)
 
-
-Next, the package can be excecuted as a module by entering the following command into the command line:
+Next, the package can be excecuted as a module by entering the following command into the command line (LIAM THERE ARE MORE ARGUMENTS THAN THESE):
 ```
 > python -m BMCS_CFD_Opt -i [input file path]
 ```

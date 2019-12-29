@@ -3,17 +3,22 @@ case:
 #
 
         # Design field:
-        number_of_cases: 20 #
-        lower_design_value: # [TBD]
-        upper_design_value: # [TBD]
+        # Secondary inlet angles
+        number_of_angles_analyzed: 10 # unitless
+        lower_angle_design_value: # [TBD]
+        upper_angle_design_value: # [TBD]
 
+        # Secondary air flow rates definition:
+        number_of_flowrates_analyzed: 5 # unitless
+        lower_flowrate_design_value: # [TBD]
+        upper_flowrate_design_value: # [TBD]
 
-        # Wood definitition:
+        # Wood definition:
         Dimension_square_wood:  0.02 # m
-        Lower_heating_value: #
+        Lower_heating_value: 20 # MJ/kg
+        firepower: = 5 # kW
 
-        # Secondary air flow definitions
-        Secondary_air_flow_rate: 16 # m^3/s
+        # Secondary air geometry 
         Diameter_secondary_inlet: 0.01 # m
         Height_secondary_inlet: 0.1 # m
 
