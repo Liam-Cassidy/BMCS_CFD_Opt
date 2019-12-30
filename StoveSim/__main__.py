@@ -64,7 +64,7 @@ def main():
 
     # Compute boundary conditions:
     m_dot_fuel_total = calculate_fuel_mass_flow(firepower, LHV) # fuel mass flow rate (kg/s)
-    
+
 
 
     # Build the matrix for the cases
