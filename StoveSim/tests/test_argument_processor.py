@@ -10,3 +10,5 @@ def test_arg_process():
     number = 1
     number_added = arg_process(number)
     assert number_added == 2
+
+test_arg_process()

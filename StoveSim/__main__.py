@@ -19,8 +19,6 @@ import yaml
 import time
 from time import sleep
 
-# boundary condition imports:
-from boundary_conditions import calculate_fuel_mass_flow
 
 """
 import import_geometry
@@ -45,27 +43,55 @@ from create_controldict import *
 from runner import *
 from compute_coordinates import *
 """
-import argument_processor
+import readArgumentsRaw
+from readArgumentsRaw import convert_namespace, pull_input_data
 
-from argument_processor import arg_process
+
+import argument_processor
+from argument_processor import create_1d_angle_array_RHS, create_1d_angle_array_LHS, create_1D_velocity_magnitude_array_RHS, compute_number_of_simulations, create_empty_simulation_array, fill_simulation_array
+
+
+import boundary_conditions
+from boundary_conditions import calculate_fuel_mass_flow
+
+
 
 def main():
     """ Main script"""
     # Construct the argument parse and parse the arguments
-    parser = argparse.ArgumentParser(description='BMCS_CFD_Opt')
+    parser = argparse.ArgumentParser(description='StoveSim')
     # File directory argument
-    parser.add_argument('-v1','--variable_1', required=True, help='Please enter the first geometric or operational parameter to be varied for sake of optimization; NOTE, the input needs to exactly match that of the input file (e.g. Secondary_air_flow_rate)')
-    parser.add_argument('-v2','--variable_2', required=False, help='Please enter the second geometric or operational parameter to be varied for sake of optimization; NOTE, the input needs to exactly match that of the input file (e.g. Secondary_air_flow_rate)')
-    parser.add_argument('-o','--output_metric', required=True, help='Please enter the single output metric to be used for optimization: options include CO2_eq (CO2 equivalent emissions released at steady state), or q_pot (total heat transfer to pot)')
     parser.add_argument('-i','--inputfile', required=True, help='Please enter the full file path (directory and filename.extension) in Linux format for the input.yaml file in LINUX format. For example, /mnt/c/Oregon_State/Spring_2019/Soft_dev_eng/StoveOpt/StoveOpt/inputFiles/input.yaml')
     import sys
     args = parser.parse_args(sys.argv[1:])
 
+    # Reading arguments raw
+    input_file = convert_namespace(args)
+    D_fd, H_fd, Dc, H_cc, L_channel, L_deck, h_deck_pot, W_gap, number_of_angles_analyzed, number_of_flowrates_analyzed, lower_angle_design_value, lower_flowrate_design_value, upper_angle_design_value, upper_flowrate_design_value, Firepower, LHV = pull_input_data(input_file)
+
+    print("D_fd test:")
+    print(D_fd)
 
     # Compute boundary conditions:
-    m_dot_fuel_total = calculate_fuel_mass_flow(firepower, LHV) # fuel mass flow rate (kg/s)
+    m_dot_fuel_total = calculate_fuel_mass_flow(Firepower, LHV) # fuel mass flow rate (kg/s)
+
+    print("mdot fuel after BC mod")
+    print(m_dot_fuel_total)
+
+    # ARGUMUENT PROCESSOR: extract the angle/flow rate definitions and create global simulation array. Fill array with
+    rhs_angle_array, step_rhs, lower_angle_design_value, upper_angle_design_value = create_1d_angle_array_RHS(number_of_angles_analyzed, lower_angle_design_value, upper_angle_design_value)
+    lhs_angle_array = create_1d_angle_array_LHS(rhs_angle_array, step_rhs, lower_angle_design_value, upper_angle_design_value, number_of_angles_analyzed)
+    RHS_velocity_magnitude_array, LHS_velocity_magnitude_array, mass_flow_rate_array, flow_rate_RHS_empty = create_1D_velocity_magnitude_array_RHS(number_of_flowrates_analyzed, lower_flowrate_design_value, upper_flowrate_design_value, D_fd)
+    N_simulations = compute_number_of_simulations(number_of_flowrates_analyzed, number_of_angles_analyzed)
+    Simulation_array_empty, case_number_array_empty = create_empty_simulation_array(N_simulations)
+    Global_simulation_array, Vx_RHS, Vy_RHS, Vx_LHS, Vy_LHS = fill_simulation_array(Simulation_array_empty, RHS_velocity_magnitude_array, mass_flow_rate_array, lhs_angle_array, rhs_angle_array, number_of_flowrates_analyzed, number_of_angles_analyzed, flow_rate_RHS_empty)
+
+    print("Firepower prior to BC:")
+    print(Firepower)
 
 
+    # Creating geometry:
+    pt_0_x, pt_0_y, pt_0_z, pt_1_x, pt_1_y, pt_1_z, pt_2_x, pt_2_y, pt_2_z, pt_3_x, pt_3_y, pt_3_z, pt_4_x, pt_4_y, pt_4_z, pt_5_x, pt_5_y, pt_5_z, pt_6_x, pt_6_y, pt_6_z, pt_7_x, pt_7_y, pt_7_z, pt_8_x, pt_8_y, pt_8_z, pt_9_x, pt_9_y, pt_9_z, pt_10_x, pt_10_y, pt_10_z, pt_11_x, pt_11_y, pt_11_z, pt_12_x, pt_12_y, pt_12_z, pt_13_x, pt_13_y, pt_13_z, pt_14_x, pt_14_y, pt_14_z, pt_15_x, pt_15_y, pt_15_z, pt_16_x, pt_16_y, pt_16_z, pt_17_x, pt_17_y, pt_17_z, pt_18_x, pt_18_y, pt_18_z, pt_19_x, pt_19_y, pt_19_z, pt_20_x, pt_20_y, pt_20_z, pt_21_x, pt_21_y, pt_21_z, pt_22_x, pt_22_y, pt_22_z, pt_23_x, pt_23_y, pt_23_z, pt_24_x, pt_24_y, pt_24_z, pt_25_x, pt_25_y, pt_25_z, pt_26_x, pt_26_y, pt_26_z, pt_27_x, pt_27_y, pt_27_z, pt_28_x, pt_28_y, pt_28_z, pt_29_x, pt_29_y, pt_29_z, pt_30_x, pt_30_y, pt_30_z, pt_31_x, pt_31_y, pt_31_z = compute_coordinates(Dc, D_fd, H_fd, H_cc, W_gap, h_deck_pot, L_channel)
 
     # Build the matrix for the cases
     # Col 1 is the case number, col 2 is secondary flow rates, and col 3 is the angles for the secondary inlet

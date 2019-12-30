@@ -1,4 +1,4 @@
-# adapted from D:\Primary Air Material\Primary Air Literature Review\Scripts\mass_flow_fuel
+#  last update 12/29/2019
 
 
 def calculate_fuel_mass_flow(Firepower, LHV):
@@ -18,9 +18,19 @@ def calculate_fuel_mass_flow(Firepower, LHV):
 
     return m_dot_fuel_total
 
-#m_dot_fuel_total = calculate_fuel_mass_flow(firepower, LHV)
+
+def test_mass_flow_fuel():
+    """testing the calculate_fuel_mass_flow function"""
+    LHV = 10
+    Firepower = 5
+
+    # Assigning a tolerance and expected value for the assertion
+    tolerance = 0.1
+    expected = 0.0005
+
+    m_dot_fuel_total = calculate_fuel_mass_flow(Firepower, LHV)
+    difference_abs = abs(m_dot_fuel_total-expected)
+    assert difference_abs <= tolerance
 
 
-# working with the secondary inlet Definitions
-
-# Let's put the Cantera mumbo jumbo in here
+test_mass_flow_fuel()
