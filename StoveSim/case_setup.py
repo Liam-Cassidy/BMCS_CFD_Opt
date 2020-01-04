@@ -85,7 +85,7 @@ def create_case_directories(N_simulations, simulation_folder_path):
 
 
 # Loop through the list of case_path_array and paste the static files required for the simulations, AND WRITE the cases that are dynamic. Should just be O/U/ files.
-#def populate_cases(case_path_array, N_simulations, Vx_RHS, Vy_RHS, Vx_LHS, Vy_LHS, foam_files_templates):
+def populate_cases(case_path_array, N_simulations, Vx_RHS, Vy_RHS, Vx_LHS, Vy_LHS, foam_files_templates):
     """Loop through the list of case_path_array and paste the static files required for the simulations, AND WRITE the files that are dynamic: Should just be U-initial boundary_conditions
     at this point
     Args:

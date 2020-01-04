@@ -58,7 +58,7 @@ import create_geometry
 from create_geometry import compute_coordinates, concatenate_vertices_to_string
 
 import write_blockmesh
-from write_blockmesh import determine_working_directory, find_block_mesh_template, write_blockmesh, rename_block_mesh
+from write_blockmesh import determine_working_directory, find_block_mesh_template, write_blockmesh, rename_block_mesh, move_blockmesh_to_static_system_dir
 
 import case_setup
 from case_setup import create_simulations_folder, create_case_directories
@@ -113,7 +113,7 @@ def main():
     block_mesh_template_path, foam_files_templates = find_block_mesh_template(current_dir)
     write_blockmesh(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt_3_str, pt_4_str, pt_5_str, pt_6_str, pt_7_str, pt_8_str, pt_9_str, pt_10_str, pt_11_str, pt_12_str, pt_13_str, pt_14_str, pt_15_str, pt_16_str, pt_17_str, pt_18_str, pt_19_str, pt_20_str, pt_21_str, pt_22_str, pt_23_str, pt_24_str, pt_25_str, pt_26_str, pt_27_str, pt_28_str, pt_29_str, pt_30_str, pt_31_str)
     blockMeshDict_for_run = rename_block_mesh(block_mesh_template_path, foam_files_templates)
-
+    blockMeshDict_static = move_blockmesh_to_static_system_dir(blockMeshDict_for_run)
 
     # case_setup mod
     simulation_folder_path = create_simulations_folder()

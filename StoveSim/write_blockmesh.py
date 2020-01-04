@@ -247,6 +247,27 @@ def rename_block_mesh(block_mesh_template_path, foam_files_templates):
 
     return blockMeshDict_for_run
 
+def move_blockmesh_to_static_system_dir(blockMeshDict_for_run):
+    """copy the edited blockmesh file into the static-system directory. The files will be copied in bulk over to each of the case directories during case setup.
+    Args:
+        blockMeshDict_for_run (str): renamed edited blockmesh, in template folder still.
+    Returns:
+        blockMeshDict_static (str): full path for the static-system-blockMeshDict location.
+    """
+
+    current_dir = os.getcwd() # StoveSim parent directory.
+    static_system_steps = "//static_foam_files//system//blockMeshDict"
+    blockMeshDict_static = current_dir + static_system_steps
+
+    copy(blockMeshDict_for_run, blockMeshDict_static)
+
+    return blockMeshDict_static
+
+
+
+
+
+
 #blockMeshDict_for_run = rename_block_mesh(block_mesh_template_path, foam_files_templates)
 
 
