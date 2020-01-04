@@ -61,7 +61,7 @@ import write_blockmesh
 from write_blockmesh import determine_working_directory, find_block_mesh_template, write_blockmesh, rename_block_mesh, move_blockmesh_to_static_system_dir
 
 import case_setup
-from case_setup import create_simulations_folder, create_case_directories
+from case_setup import create_simulations_folder, create_case_directories, paste_static_foam_files, add_foam_directories
 
 
 def main():
@@ -118,8 +118,8 @@ def main():
     # case_setup mod
     simulation_folder_path = create_simulations_folder()
     case_number_array, case_path_array = create_case_directories(N_simulations, simulation_folder_path)
-
-
+    case_zero_paths, case_system_paths, case_constant_paths, case_TDAC_paths = add_foam_directories(case_path_array, N_simulations)
+    paste_static_foam_files(case_zero_paths, case_system_paths, case_constant_paths, case_TDAC_paths, N_simulations)
 
 
     # Create X number of results matrices: col 1 is case number, col 2 is the secondary flow rate, col 3 is the secondary angle, col 4 is the respective dependent variable being tracked

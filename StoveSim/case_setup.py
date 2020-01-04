@@ -3,6 +3,10 @@
 
 import os
 import numpy as np
+import shutil
+from shutil import copytree
+from shutil import copy
+
 
 def create_simulations_folder():
     """Create a directory within the StoveSim master folder called simulations. This is where case folders will be created based on N-cases.
@@ -81,6 +85,94 @@ def create_case_directories(N_simulations, simulation_folder_path):
 #Vy_RHS = Simulation_array_empty[:,6]  # RHS y component.
 #Vx_LHS = Simulation_array_empty[:,7]  # LHS x component.
 #Vy_LHS = Simulation_array_empty[:,8]  # LHS y component.
+
+def add_foam_directories(case_path_array, N_simulations):
+    """Loop through the new case directories and add the system, constant, and 0 folder
+    Args:
+    case_full_paths (dict): list of full strings of case folders for future use
+    k_tot (int): number of cases total written initially
+
+    Returns:
+    case_zero_paths (dict): list of the full paths for 0 foam paths
+    case_system_paths (dict): list of the full paths for system foam paths
+    case_constant_paths (dict): of the full paths for constant foam paths
+    """
+
+    constant_dir_add = "//constant//"
+    system_dir_add = "//system//"
+    zero_dir_add    = "//0//"
+    TDAC_dir_add = "//TDAC//"
+
+    #initialize paths
+    case_zero_paths = []
+    case_system_paths = []
+    case_constant_paths = []
+    case_TDAC_paths = []
+
+    y = 0
+
+    while y <= N_simulations:
+        const = case_path_array[y] + constant_dir_add
+        zero = case_path_array[y] + zero_dir_add
+        system = case_path_array[y] + system_dir_add
+        TDAC = case_path_array[y] + TDAC_dir_add
+
+        # Make locate_directories
+        #os.mkdir(const)
+        #os.mkdir(zero)
+        #os.mkdir(system)
+        # add to dictionaries
+        case_zero_paths.append(zero)
+        case_system_paths.append(system)
+        case_constant_paths.append(const)
+        case_TDAC_paths.append(TDAC)
+
+        y = y + 1
+    #print("case_zero_paths dictionary")
+    #print(case_zero_paths)
+    #print("case_constant_paths dictionary")
+    #print(case_constant_paths)
+    #print("case_system_paths dictionary")
+    #print(case_system_paths)
+    return case_zero_paths, case_system_paths, case_constant_paths, case_TDAC_paths
+
+#case_zero_paths, case_system_paths, case_constant_paths = add_foam_directories(case_full_paths, k_tot)
+
+def paste_static_foam_files(case_zero_paths, case_system_paths, case_constant_paths, case_TDAC_paths, N_simulations):
+    """copy and paste static OpenFOAM solver files into the constant, 0, system directories
+    Location for static files is in StoveOpt master directory
+    N_simulations (int): number of cases total written initially
+
+    Args:
+    case_zero_paths (array): list of the full paths for 0 foam paths
+    case_system_paths (array): list of the full paths for system foam paths
+    case_constant_paths (array): list of the full paths for constant foam paths
+    case_TDAC_paths (array): list of full paths for TDAC case folders
+
+    Returns:
+    None
+    """
+    current_dir = os.getcwd()
+    static_zero_files = current_dir + "//static_foam_files//" + "0"
+    static_constant_files = current_dir + "//static_foam_files//" + "constant"
+    static_system_files = current_dir + "//static_foam_files//" + "system"
+    static_TDAC_files = current_dir + "//static_foam_files//" + "TDAC"
+
+    # Copytree--Moves all contents from a directory to location specified
+    # Loop will change the destination based on index, and paste from the static sources
+    i = 0 # initialize loop
+    while i <= N_simulations:
+        copytree(static_zero_files, case_zero_paths[i])
+        copytree(static_constant_files, case_constant_paths[i])
+        copytree(static_system_files, case_system_paths[i])
+        copytree(static_TDAC_files, case_TDAC_paths[i])
+
+        i = i + 1
+
+#paste_static_foam_files(case_zero_paths, case_system_paths, case_constant_paths, k_tot)
+
+
+
 
 
 
