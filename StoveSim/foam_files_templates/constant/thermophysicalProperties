@@ -17,6 +17,7 @@ FoamFile
 
 thermoType
 {
+
     type            hePsiThermo;
     mixture         reactingMixture;
     transport       sutherland;
@@ -29,10 +30,7 @@ thermoType
 inertSpecie N2;
 
 chemistryReader foamChemistryReader;
-
-foamChemistryFile "$FOAM_CASE/constant/reactions";
-
-foamChemistryThermoFile "$FOAM_CASE/constant/thermo.compressibleGas";
-
+foamChemistryFile "$FOAM_CASE/constant/reactionsGRI";
+foamChemistryThermoFile "$FOAM_CASE/constant/thermo.compressibleGasGRI";
 
 // ************************************************************************* //

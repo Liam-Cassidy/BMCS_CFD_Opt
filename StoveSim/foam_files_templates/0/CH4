@@ -21,10 +21,11 @@ internalField   uniform 0.0;
 
 boundaryField
 {
+   
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 0.0;
+        value           uniform 1; //primary inlet is CH4
     }
 	secondary_air_LHS
 	{
@@ -38,8 +39,7 @@ boundaryField
 	}		
 	stove_body
 	{
-		type			fixedValue;
-		value			uniform 0.0;
+		type			zeroGradient;
 	}
     outlet_LHS
     {

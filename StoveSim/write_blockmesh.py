@@ -19,7 +19,14 @@ def determine_working_directory():
 
 
 def find_block_mesh_template(current_dir):
-    """Create a static files folder for placing files that are not changed across the simulation space"""
+    """Create a static files folder for placing files that are not changed across the simulation space
+    Args:
+        current_dir (str): Current working directory.
+    Returns:
+        block_mesh_template_path (str): full path where the block mesh template exists.
+        foam_files_templates (str): where the template files exist. Will be used to create cases.
+
+    """
 
     # NEED TO ADD SOME FUNCTIONALITY FOR IF THE FILE PATH ALREADY EXISTS IN THE SYSTEM
     foam_files_templates = current_dir + "//" + "foam_files_templates//"

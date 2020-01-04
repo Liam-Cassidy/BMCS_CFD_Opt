@@ -14,64 +14,35 @@ FoamFile
     object      controlDict;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-application reactingFoam;
 
-startFrom startTime;
+application     reactingFoam;
 
-startTime 0;
+startFrom       latestTime;
 
-stopAt endTime;
+startTime       0;
 
-endTime 1000;
+stopAt          endTime;
 
-deltaT 0.01;
+endTime         10;
 
-writeControl adjustableRunTime;
+deltaT          0.0001;
 
-writeInterval 0.1;
+writeControl    runTime;
 
-purgeWrite 0;
+writeInterval   0.0001;
 
-writeFormat ascii;
+purgeWrite      0;
 
-writePrecision 6;
+writeFormat     binary;
+
+writePrecision  10;
 
 writeCompression off;
 
-timeFormat general;
+timeFormat      general;
 
-timePrecision 6;
+timePrecision   6;
 
 runTimeModifiable true;
 
-adjustTimeStep yes;
-
-maxCo 0.4;
-
-functions
-{
-probes
-{
-functionObjectLibs ( "libsampling.so" );
-
-type probes;
-
-name probes;
-
-outputControl outputTime;
-outputInterval 1;
-
-fields
-(
-T
-);
-
-probeLocations
-(
-(0 -0.04 0.4)
-(0 -0.04 0.33)
-(0 0 0.33)
-(0 0.15 0.33)
-(0 0.19 0.33)
-(0 0.19 0.4)
-);
+// ************************************************************************* //

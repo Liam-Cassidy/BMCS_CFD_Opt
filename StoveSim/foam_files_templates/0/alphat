@@ -43,15 +43,11 @@ boundaryField
 	}
     outlet_LHS
     {
-        type            inletOutlet;
-        inletValue      uniform 0;
-        value           uniform 0;
+        type            zeroGradient;
     }
 	outlet_RHS
     {
-        type            inletOutlet;
-        inletValue      uniform 0;
-        value           uniform 0;
+        type            zeroGradient;
     }
     frontAndBack
     {

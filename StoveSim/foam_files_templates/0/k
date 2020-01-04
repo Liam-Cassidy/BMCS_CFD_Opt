@@ -11,46 +11,50 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      N2;
+    object      k;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 0 0 0 0];
+dimensions      [0 2 -2 0 0 0 0];
 
-internalField   uniform 0.763149;
+internalField   uniform 1;
 
 boundaryField
 {
     primary_inlet
     {
-        type            fixedValue;
-        value           uniform 0;
+        type            turbulentIntensityKineticEnergyInlet;
+        intensity       0.08; //changed this to match fuel condition for GRI
+        value           uniform 1;
     }
-	secondary_air_RHS
+    secondary_air_RHS
     {
-        type            fixedValue;
-        value           uniform 0.763149;
+        type            turbulentIntensityKineticEnergyInlet;
+        intensity       0.02;
+        value           uniform 1;
     }
-	secondary_air_LHS
+    secondary_air_LHS
     {
-        type            fixedValue;
-        value           uniform 0.763149;
+        type            turbulentIntensityKineticEnergyInlet;
+        intensity       0.02;
+        value           uniform 1;
     }
     outlet_LHS
     {
         type            inletOutlet;
-        inletValue      uniform 0.763149;
-        value           uniform 0.763149;
+        inletValue      uniform 1;
+        value           uniform 1;
     }
 	outlet_RHS
     {
         type            inletOutlet;
-        inletValue      uniform 0.763149;
-        value           uniform 0.763149;
+        inletValue      uniform 1;
+        value           uniform 1;
     }
     stove_body
     {
-        type            zeroGradient;
+        type            kqRWallFunction;
+        value           uniform 1;
     }
 }
 

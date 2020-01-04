@@ -17,47 +17,40 @@ FoamFile
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 0.0;
+internalField   uniform 0;
 
 boundaryField
 {
-
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 0.0;
+        value           uniform 0;
+    }
+    secondary_air_RHS
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+    secondary_air_LHS
+    {
+        type            fixedValue;
+        value           uniform 0;
     }
     outlet_LHS
     {
         type            inletOutlet;
-        inletValue      uniform 0.0;
-        value           uniform 0.0;
-
+        inletValue      uniform 0;
+        value           uniform 0;
     }
 	outlet_RHS
     {
         type            inletOutlet;
-        inletValue      uniform 0.0;
-        value           uniform 0.0;
+        inletValue      uniform 0;
+        value           uniform 0;
     }
-	secondary_air_LHS
+    stove_body
     {
-        type            fixedValue;
-        value           uniform 0.0;
-    }
-	secondary_air_RHS
-    {
-        type            fixedValue;
-        value           uniform 0.0;
-    }
-	stove_body
-    {
-        type            fixedValue;
-        value           uniform 0.0;
-    }
-    frontAndBack
-    {
-        type            empty;
+        type            zeroGradient;
     }
 }
 

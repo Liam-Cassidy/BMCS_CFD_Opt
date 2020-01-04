@@ -27,7 +27,7 @@ solvers
         solver           PCG;
         preconditioner   DIC;
         tolerance        1e-6;
-        relTol           0.1;
+        relTol           0.01;
     }
 
     pFinal
@@ -47,37 +47,43 @@ solvers
     "(U|h|k|epsilon)Final"
     {
         $U;
-        relTol          0.1;
     }
 
     Yi
     {
-        $U;
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-8;
         relTol          0.1;
     }
 }
 
 PIMPLE
 {
-    momentumPredictor no;
-    nOuterCorrectors  1;
-    nCorrectors     1;
+    momentumPredictor   yes;
+    nOuterCorrectors    1;
+    nCorrectors         2;
     nNonOrthogonalCorrectors 0;
 
-    maxDeltaT       1e-5;
-    maxCo           1;
-    alphaTemp       0.05;
-    rDeltaTSmoothingCoeff 1;
-    rDeltaTDampingCoeff 1;
+    maxDeltaT           1e-4;
+    maxCo               0.25;
+    alphaTemp           0.05;
+    alphaY              0.05;
+    Yref
+    {
+        O2                  0.1;
+        CH4                 0.1;
+    }
+    rDeltaTSmoothingCoeff   0.05;
+    rDeltaTDampingCoeff     1;
 }
 
 relaxationFactors
 {
     equations
     {
-        ".*" 1;
+        ".*"    1;
     }
 }
-
 
 // ************************************************************************* //

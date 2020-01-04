@@ -21,7 +21,6 @@ internalField   uniform 0;
 
 boundaryField
 {
-
     primary_inlet
     {
         type            fixedValue;

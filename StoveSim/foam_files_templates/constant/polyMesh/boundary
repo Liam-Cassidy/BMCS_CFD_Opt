@@ -8,7 +8,7 @@
 FoamFile
 {
     version     2.0;
-    format      ascii;
+    format      binary;
     class       polyBoundaryMesh;
     location    "constant/polyMesh";
     object      boundary;
@@ -20,52 +20,52 @@ FoamFile
     outlet_LHS
     {
         type            patch;
-        nFaces          25;
-        startFace       2575;
+        nFaces          400;
+        startFace       185200;
     }
     outlet_RHS
     {
         type            patch;
-        nFaces          25;
-        startFace       2600;
+        nFaces          400;
+        startFace       185600;
     }
     secondary_air_RHS
     {
         type            patch;
-        nFaces          25;
-        startFace       2625;
+        nFaces          400;
+        startFace       186000;
     }
     secondary_air_LHS
     {
         type            patch;
-        nFaces          25;
-        startFace       2650;
+        nFaces          400;
+        startFace       186400;
     }
     primary_inlet
     {
         type            patch;
-        nFaces          25;
-        startFace       2675;
+        nFaces          400;
+        startFace       186800;
     }
     stove_body
     {
         type            patch;
-        nFaces          243;
-        startFace       2700;
+        nFaces          3690;
+        startFace       187200;
     }
     frontAndBack
     {
         type            empty;
         inGroups        1(empty);
-        nFaces          300;
-        startFace       2943;
+        nFaces          4800;
+        startFace       190890;
     }
     defaultFaces
     {
         type            empty;
         inGroups        1(empty);
-        nFaces          150;
-        startFace       3243;
+        nFaces          2400;
+        startFace       195690;
     }
 )
 

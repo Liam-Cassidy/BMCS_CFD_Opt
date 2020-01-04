@@ -11,37 +11,32 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      H2O;
+    object      H2;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 0;
+internalField   uniform 0.005008;
 
 boundaryField
 {
-
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 0.0;
+        value           uniform 0;
+    }
+	secondary_air_RHS
+    {
+        type            fixedValue;
+        value           uniform 0;
     }
 	secondary_air_LHS
-	{
-		type			fixedValue;
-		value			uniform 0.0;
-	}	
-	secondary_air_RHS
-	{
-		type			fixedValue;
-		value			uniform 0.0;
-	}		
-	stove_body
-	{
-		type			fixedValue;
-		value			uniform 0.0;
-	}
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }	
+	
     outlet_LHS
     {
         type            inletOutlet;
@@ -54,9 +49,9 @@ boundaryField
         inletValue      uniform 0;
         value           uniform 0;
     }
-    frontAndBack
+    stove_body
     {
-        type            empty;
+        type            zeroGradient;
     }
 }
 

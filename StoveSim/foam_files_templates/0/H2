@@ -11,52 +11,46 @@ FoamFile
     format      ascii;
     class       volScalarField;
     location    "0";
-    object      T;
+    object      H2;
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-dimensions      [0 0 0 1 0 0 0];
+dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 293;
+internalField   uniform 0;
 
 boundaryField
 {
-
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 293;
+        value           uniform 0;
+    }
+	secondary_air_RHS
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+	secondary_air_LHS
+    {
+        type            fixedValue;
+        value           uniform 0;
     }
     outlet_LHS
     {
         type            inletOutlet;
-        inletValue      uniform 293;
-        value           uniform 293;
+        inletValue      uniform 0;
+        value           uniform 0;
     }
 	outlet_RHS
     {
         type            inletOutlet;
-        inletValue      uniform 293;
-        value           uniform 293;
+        inletValue      uniform 0;
+        value           uniform 0;
     }
-	secondary_air_RHS
+    stove_body
     {
-		type            fixedValue;
-        value           uniform 293;
-    }
-    secondary_air_LHS
-    {
-        type            fixedValue;
-        value           uniform 293;
-    }
-	stove_body //This will probably need to change
-	{
-		type			fixedValue; 
-		value			uniform 293; 
-	
-    frontAndBack
-    {
-        type            empty;
+        type            zeroGradient;
     }
 }
 
