@@ -2,7 +2,7 @@
   =========                 |
   \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
    \\    /   O peration     | Website:  https://openfoam.org
-    \\  /    A nd           | Version:  6
+    \\  /    A nd           | Version:  7
      \\/     M anipulation  |
 \*---------------------------------------------------------------------------*/
 FoamFile
@@ -49,23 +49,24 @@ FoamFile
     }
     stove_body
     {
-        type            patch;
-        nFaces          243;
+        type            wall;
+        inGroups        List<word> 1(wall);
+        nFaces          325;
         startFace       2700;
     }
     frontAndBack
     {
         type            empty;
-        inGroups        1(empty);
+        inGroups        List<word> 1(empty);
         nFaces          300;
-        startFace       2943;
+        startFace       3025;
     }
     defaultFaces
     {
         type            empty;
-        inGroups        1(empty);
-        nFaces          150;
-        startFace       3243;
+        inGroups        List<word> 1(empty);
+        nFaces          100;
+        startFace       3325;
     }
 )
 
