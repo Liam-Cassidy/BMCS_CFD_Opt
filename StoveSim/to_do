@@ -1,5 +1,45 @@
-CFD Project to do:
----read_arguments
------See if the documentation website is bulding correctly
+Software development project to do:
+--working on getting boundary conditions implemented.
+--Researching the compositions coming up from the bottom the stove will be based on either:
+(1) Miller-loinberg
+(2) UW folks
 
+
+After the boundary conditions are written:
+(1) setup the simulation looping in the run_cases module.
+(2) setup post-processing:
+	Loop through the cases, navigate to postprocessing folder, pull in data, write to excel sheet of a single workbook (or an array of some sort) go to next case.
+
+See about computing equilibrium temperature and mixture using cantera solvers for the primary inlet condition.
+	
+--the order of operations for writing the article:
+-Compute the temperature of pot (found), and how to assign flux condition at outer walls
+	-found something here, but need to figure out how to incorporate it
+-Write the chemical equilibrium script
+-Write a series of test cases folder in the GCI path within StoveSim
+	-run a simulation for a "long time" -- first guess is five minutes (real time). Once finished, open the mass flow probe files and see if steady state is reached.
+	-Will have to add probes for mass flow rate at each inlet/outlet
+	-Use GCI script to 
+	
+GCI run:	
+5 minutes --> 300 s. 0.01 time step, = 30,000 iterations
+	
+got the wall BCs for the pot surfaces and outer walls.
+	--Next, setup the primary air calcs, check the schemes, setup the mass flow rate probes, run the GCI to get mesh.
+	--once mesh is found, create more post-processing things, and fire it up!
+	
+	
+-get a csv to write for the chemical equilibrium function. Can loop through and get major elements. add remainders to n2 or something.
+--read up on the GRI mechanism and what it really means. look at doing a sensitivity analysis for the cantera calc. 
+
+
+
+GCI plan:
+run program, verify geometry looks correct, edit mesh densities (5, 10, 20), edit chemical 0 to reflect the calculated species, edit U 0 to be the upper bound calculated, edit T zero (primary inlet only) to reflect calc.
+correct mesh is here: StoveSim/correct_mesh_write/case_0
+
+write a new folder with the edited conditions
+	/correct_mesh/gci_boundaryconds/
+
+working out of GCI_study
 
