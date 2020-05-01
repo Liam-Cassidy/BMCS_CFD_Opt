@@ -4,17 +4,17 @@ case:
 
         # Design field:
         # Secondary inlet angles
-        number_of_angles_analyzed: 4 # unitless
+        number_of_angles_analyzed: 3 # unitless
         lower_angle_design_value: 120 # [TBD]
         upper_angle_design_value: 240 # [TBD]
 
         # Secondary air flow rates definition:
-        number_of_flowrates_analyzed: 4 # unitless
+        number_of_flowrates_analyzed: 3 # unitless
         lower_flowrate_design_value: 0.00035 # [TBD]
         upper_flowrate_design_value: 0.00059 # [TBD]
 
         # Wood definition:
-        Lower_heating_value: 20 # MJ/kg
+        Lower_heating_value: 19.6 # MJ/kg
         firepower: 5 # kW
 
         # Secondary air geometry
@@ -22,13 +22,11 @@ case:
         Height_secondary_inlet: 0.05 # m
 
         # Stove Geometry Definitions
-        Combustion_chamber_diameter: 0.08 # m
-        Combustion_chamber_height: 0.12 # m
-        Channel_width: 0.02 # m
-        Channel_height: 0.1 # m
-        Height_cone_deck: 0.02 # m
-        Length_cone_deck: 0.07 # m
-        Pot_spacing: 0.03 #
+        Combustion_chamber_diameter: 0.13 # m
+        Combustion_chamber_height: 0.20 # m
+        Height_cone_deck: 0.025 # m
+        Length_cone_deck: 0.075 # m
+
 
         # CFD definitions
         Maximum_grid_spacing: 0.025 # m

@@ -1,6 +1,7 @@
 # adapted from D:\Primary Air Material\Primary Air Literature Review\Scripts\mass_flow_fuel
-Firepower = 5 # assumed  kW
+Firepower = 7 # assumed  kW
 LHV = 20
+Dc = 0.13
 import os
 from decimal import *
 
@@ -148,10 +149,10 @@ def compute_primary_air_flow(Firepower):
         m_dot_primary_air (double): mass flow rate of naturally entrained air (kg/s).
         mol_dot_primary_air (double): molar flow rate of naturally entrained air (mol/s).
     """
-    cp_average = 1.099# kJ/kg-K
+    cp_average = 1.044# kJ/kg-K
     Q_dot = Firepower # kJ/s (kW)
     T_amb = 300 # K
-    T_h = 1300 # K
+    T_h = 1274 # K
 
     m_dot_primary_air = (Q_dot)/(cp_average*(T_h - T_amb)) #kg/s
 
@@ -167,9 +168,35 @@ def compute_primary_air_flow(Firepower):
 
     return mol_dot_primary_air, m_dot_primary_air
 
-mol_dot_primary_air, m_dot_primary_air = compute_primary_air_flow(Firepower)
+#mol_dot_primary_air, m_dot_primary_air = compute_primary_air_flow(Firepower)
 
-# Looking at computing the primary inlet mixture -- Cantera.
+
+def compute_primary_air_flow_2(Firepower):
+    """using new flame temperature assumption"""
+
+    cp_average = 1.044
+    Q_dot = Firepower
+    T_amb = 300 # K
+    T_h = 1274 # K
+
+    m_dot_primary_air = (Q_dot)/(cp_average*(T_h - T_amb)) #kg/s
+
+    mw_air = 0.018 #kg/mol
+
+    mol_dot_primary_air = m_dot_primary_air/mw_air
+
+    print("mass flow rate of air:")
+    print(m_dot_primary_air)
+
+    print("molar flow rate of primary air:")
+    print(mol_dot_primary_air)
+
+    print("primary air velocty:")
+
+
+    return mol_dot_primary_air, m_dot_primary_air
+
+mol_dot_primary_air, m_dot_primary_air = compute_primary_air_flow_2(Firepower)
 
 def compute_primary_mixture(m_dot_frac_CO, m_dot_frac_CO2, m_dot_frac_H2, m_dot_frac_H2O, m_dot_frac_CH4, mol_dot_primary_air):
     """
@@ -235,7 +262,7 @@ def compute_primary_mixture(m_dot_frac_CO, m_dot_frac_CO2, m_dot_frac_H2, m_dot_
     print(mol_frac_ch4)
 
 
-    B.TPX = 300.0, ct.one_atm, {'H2':mol_frac_h2, 'H2O':mol_frac_h2o, 'CH4':mol_frac_ch4, 'CO':mol_frac_co, 'CO2':mol_frac_co2}
+    B.TPX = 748, ct.one_atm, {'H2':mol_frac_h2, 'H2O':mol_frac_h2o, 'CH4':mol_frac_ch4, 'CO':mol_frac_co, 'CO2':mol_frac_co2}
 
     # Set molar flow rates:
     # CH4 + 2 O2 -> CO2 + 2 H2O
@@ -247,7 +274,7 @@ def compute_primary_mixture(m_dot_frac_CO, m_dot_frac_CO2, m_dot_frac_H2, m_dot_
     # NEW LINES: air properties.
     mol_frac_n2_atm = 0.79
     mol_frac_o2_atm = 0.21
-    A.TPX = 300.00, ct.one_atm, {'N2':mol_frac_n2_atm, 'O2':mol_frac_o2_atm}
+    A.TPX = 748, ct.one_atm, {'N2':mol_frac_n2_atm, 'O2':mol_frac_o2_atm}
 
     B.moles = float(total_molar_flow_rate)
     A.moles = float(mol_dot_primary_air) # chosen randomly for now.
@@ -260,6 +287,7 @@ def compute_primary_mixture(m_dot_frac_CO, m_dot_frac_CO2, m_dot_frac_H2, m_dot_
 
     # Show that this state corresponds to stoichiometric combustion
     gas.equilibrate('HP') # equilibrate the mixture with constant enthaly and pressure
+    print("here is the gas")
     print(gas.report()) # print the gas solution object report
 
     mol_fractions = gas.X
@@ -275,14 +303,85 @@ def compute_primary_mixture(m_dot_frac_CO, m_dot_frac_CO2, m_dot_frac_H2, m_dot_
 mol_fractions_numpy = compute_primary_mixture(m_dot_frac_CO, m_dot_frac_CO2, m_dot_frac_H2, m_dot_frac_H2O, m_dot_frac_CH4, mol_dot_primary_air)
 
 
+def compute_velocity_primary_inlet(Dc, m_dot_primary_air, m_dot_fuel_total):
+    """Calculate the total mass flow rate as the combination of the air and fuel mass flow rates.
+    Use the combustion chamber diameter to compute the average velocity at the inlet. using air at STP for the density
 
+    Args:
+        Dc (double): Combustion chamber diameter.
+        m_dot_primary_air (double): Mass flow rate of primary air at STP computed using the Agenbroad simple bernoulli model.
+        m_dot_fuel_total (double): Mass flow rate of the fuel computed using firepower and heating value of fuel.
 
+    Returns:
+        velocity_primary (double): Calculated total primary flow velocty.
+    """
+
+    m_dot_primary_air_fuel = Decimal(m_dot_primary_air) + Decimal(m_dot_fuel_total) # sum of the mass flow rates between the two
+
+    density_primary = Decimal(0.6267) # from cantera for the test case
+
+    vol_flow_rate_total = m_dot_primary_air_fuel/density_primary
+
+    area_primary = Decimal(3.14159)*Decimal(0.25)*(Decimal(Dc)**2)
+
+    velocity_primary = vol_flow_rate_total/area_primary
+
+    print("primary air velocity:")
+    print(velocity_primary)
+
+    return velocity_primary
+
+velocity_primary = compute_velocity_primary_inlet(Dc, m_dot_primary_air, m_dot_fuel_total)
 # Figure out how to write out the species, fractions temperature data.
 # create a loop and write outs for temperature, pressure, species mass fraction, species mol fractions.
 
+def get_density():
+    """use dpx on Udesen mixture for mixture density"""
+    # Converting mass flow rates per species into molar flow rates:
+    MW_CO = 0.02801 # kg/mol
+    MW_CO2 = 0.04401 # kg/mol
+    MW_H2 = 0.00201588 # kg/mol
+    MW_H2O = 0.01802 # kg/mol
+    MW_CH4 = 0.01604 # kg/mol
 
+    # molar flow rates of fuel. (mol/s)
+    mol_dot_co = m_dot_frac_CO/Decimal(MW_CO)
+    mol_dot_co2 = m_dot_frac_CO2/Decimal(MW_CO2)
+    mol_dot_h2 = m_dot_frac_H2/Decimal(MW_H2)
+    mol_dot_h2o = m_dot_frac_H2O/Decimal(MW_H2O)
+    mol_dot_ch4 = m_dot_frac_CH4/Decimal(MW_CH4)
 
+    total_molar_flow_rate = mol_dot_co + mol_dot_co2 + mol_dot_h2 + mol_dot_h2 + mol_dot_h2o + mol_dot_ch4
 
+    mol_frac_co = mol_dot_co/total_molar_flow_rate
+    mol_frac_co2 = mol_dot_co2/total_molar_flow_rate
+    mol_frac_h2 = mol_dot_h2/total_molar_flow_rate
+    mol_frac_h2o = mol_dot_h2o/total_molar_flow_rate
+    mol_frac_ch4 = mol_dot_ch4/total_molar_flow_rate
+
+    print("total molar flow rate of fuel")
+    print(total_molar_flow_rate)
+
+    print("mole fraction co:")
+    print(mol_frac_co)
+
+    print("mole fraction co2:")
+    print(mol_frac_co2)
+
+    print("mol fraction of h2:")
+    print(mol_frac_h2)
+
+    print("mol fraction of h2o:")
+    print(mol_frac_h2o)
+
+    print("mole fraction of ch4:")
+    print(mol_frac_ch4)
+    gas2 = ct.Solution('gri30.xml')
+    gas2.TPX = 800.0, ct.one_atm, {'H2':mol_frac_h2, 'H2O':mol_frac_h2o, 'CH4':mol_frac_ch4, 'CO':mol_frac_co, 'CO2':mol_frac_co2}
+
+    gas2()
+
+get_density()
 #m_dot_fuel_total = calculate_fuel_mass_flow(firepower, LHV)
 
 

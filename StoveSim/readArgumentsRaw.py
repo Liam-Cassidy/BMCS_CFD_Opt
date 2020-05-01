@@ -37,7 +37,6 @@ def pull_input_data(input_file):
         L_channel (double): Length of channel/skirt/shield, defined by user.
         L_deck (double): Length of cone deck, defined by user.
         h_deck_pot (double): Pot spacing from cone deck, defined by user.
-        W_gap (double): Channel/skirt/shield gap, defined by user.
         number_of_angles_analyzed (int): Number og angles to analyze defined by user
         lower_angle_design_value (float): lower limit for angles.
         upper_angle_design_value (float): upper limit for angles analyzed.
@@ -54,10 +53,8 @@ def pull_input_data(input_file):
         # Stove geometry Definitions
         Dc = doc['case']['Combustion_chamber_diameter']
         H_cc = doc['case']['Combustion_chamber_height']
-        W_gap = doc['case']['Channel_width']
-        L_channel = doc['case']['Channel_height']
         L_deck = doc['case']['Length_cone_deck']
-        h_deck_pot = doc['case']['Pot_spacing']
+        h_deck_pot = doc['case']['Height_cone_deck']
         D_fd = doc['case']['Diameter_secondary_inlet']
         H_fd = doc['case']['Height_secondary_inlet']
 
@@ -73,4 +70,4 @@ def pull_input_data(input_file):
         Firepower = doc['case']['firepower']
         LHV = doc['case']['Lower_heating_value']
 
-    return  D_fd, H_fd, Dc, H_cc, L_channel, L_deck, h_deck_pot, W_gap, number_of_angles_analyzed, number_of_flowrates_analyzed, lower_angle_design_value, lower_flowrate_design_value, upper_angle_design_value, upper_flowrate_design_value, Firepower, LHV
+    return  D_fd, H_fd, Dc, H_cc, L_deck, h_deck_pot, number_of_angles_analyzed, number_of_flowrates_analyzed, lower_angle_design_value, lower_flowrate_design_value, upper_angle_design_value, upper_flowrate_design_value, Firepower, LHV

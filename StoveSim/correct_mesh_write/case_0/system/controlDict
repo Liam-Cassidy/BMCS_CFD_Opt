@@ -23,13 +23,13 @@ startTime       0;
 
 stopAt          endTime;
 
-endTime         10;
+endTime         5000;
 
-deltaT          0.0001;
+deltaT          1;
 
 writeControl    runTime;
 
-writeInterval   0.0001;
+writeInterval   100;
 
 purgeWrite      0;
 
@@ -44,5 +44,24 @@ timeFormat      general;
 timePrecision   6;
 
 runTimeModifiable true;
+
+functions
+{
+
+// mass flow rate data
+#includeFunc flowRatePatch(name=outlet_LHS)
+#includeFunc flowRatePatch(name=outlet_RHS)
+#includeFunc flowRatePatch(name=primary_inlets)
+#includeFunc flowRatePatch(name=L_fuel)
+#includeFunc flowRatePatch(name=R_fuel)
+#includeFunc flowRatePatch(name=top_fuel)
+#includeFunc flowRatePatch(name=secondary_air_LHS)
+#includeFunc flowRatePatch(name=secondary_air_RHS)
+#includeFunc wallHeatFlux(name=pot_surfaces)
+#includeFunc wallHeatFlux(name=stove_body)
+
+
+
+
 
 // ************************************************************************* //

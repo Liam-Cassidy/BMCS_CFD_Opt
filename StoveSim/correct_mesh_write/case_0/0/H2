@@ -24,7 +24,7 @@ boundaryField
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 0;
+        value           uniform 0.006;
     }
 	secondary_air_RHS
     {

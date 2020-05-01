@@ -114,7 +114,7 @@ def create_1D_velocity_magnitude_array_RHS(number_of_flowrates_analyzed, lower_f
     # Convert to velocity using user-defined secondary air flow rate
     area_secondary_inlet = (3.14159/4)*(D_fd**2) # secondary inlet cross sectional area m^2
     # Multiplying each np array entry with the area Q*A = V
-    RHS_velocity_magnitude_array = flow_rate_RHS_empty*area_secondary_inlet
+    RHS_velocity_magnitude_array = flow_rate_RHS_empty/area_secondary_inlet
     print("RHS velocity magnitude following multiplication")
     print(RHS_velocity_magnitude_array)
 
@@ -124,6 +124,7 @@ def create_1D_velocity_magnitude_array_RHS(number_of_flowrates_analyzed, lower_f
 
     # setting the LHS equal to the RHS velocities:
     LHS_velocity_magnitude_array = RHS_velocity_magnitude_array
+
 
     return RHS_velocity_magnitude_array, LHS_velocity_magnitude_array, mass_flow_rate_array, flow_rate_RHS_empty
 
@@ -249,6 +250,9 @@ def fill_simulation_array(Simulation_array_empty, RHS_velocity_magnitude_array, 
     # rename to Global_simulation_array
     Global_simulation_array = Simulation_array_empty
 
+
+    print("global simulation array:")
+    print(Global_simulation_array)
 
     return Global_simulation_array, Vx_RHS, Vy_RHS, Vx_LHS, Vy_LHS
 

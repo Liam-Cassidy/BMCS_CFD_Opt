@@ -17,14 +17,14 @@ FoamFile
 
 dimensions      [0 0 0 0 0 0 0];
 
-internalField   uniform 0.005008;
+internalField   uniform 0;
 
 boundaryField
 {
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 0;
+        value           uniform 0.312;
     }
 	secondary_air_RHS
     {

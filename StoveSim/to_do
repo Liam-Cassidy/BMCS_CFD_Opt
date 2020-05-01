@@ -1,4 +1,19 @@
-Software development project to do:
+working out of the GCI_study folder.
+-meshing and conditions being assigned and working.
+---looks like the solution might be divering....
+
+Software development to do:
+---Update the paper to have mass flow rate conditions instead.
+---Update the figure from the paper to not have the cone deck length (it isn't in the script this way)
+---update the GCI numbers for the cases running.
+---write up the schemes integrated with the model
+-----chat on the localEuler approximation and look up what the gradient/divergence/interpolation schemes are.
+
+
+
+
+
+
 --working on getting boundary conditions implemented.
 --Researching the compositions coming up from the bottom the stove will be based on either:
 (1) Miller-loinberg
@@ -42,4 +57,15 @@ write a new folder with the edited conditions
 	/correct_mesh/gci_boundaryconds/
 
 working out of GCI_study
+
+Next:
+-compute a velocity at the primary inlet based on mass flow rate and Dc.
+	-need to use the ideal gas law to find density to compute Q (m_dot/rho)
+	-use the combustion chamber diameter to compute primary inlet area, compute V (Q*A)
+
+
+
+in the GCI_study folder, this is where the case study will be run.
+	--this is where the updated correct boundary conditions are.
+
 

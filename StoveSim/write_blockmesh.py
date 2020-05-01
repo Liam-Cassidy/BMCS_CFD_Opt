@@ -230,7 +230,7 @@ def write_blockmesh(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt_3
 #write_blockmesh(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt_3_str, pt_4_str, pt_5_str, pt_6_str, pt_7_str, pt_8_str, pt_9_str, pt_10_str, pt_11_str, pt_12_str, pt_13_str, pt_14_str, pt_15_str, pt_16_str, pt_17_str, pt_18_str, pt_19_str, pt_20_str, pt_21_str, pt_22_str, pt_23_str, pt_24_str, pt_25_str, pt_26_str, pt_27_str, pt_28_str, pt_29_str, pt_30_str, pt_31_str)
 
 
-def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt_3_str, pt_4_str, pt_5_str, pt_6_str, pt_7_str, pt_8_str, pt_9_str, pt_10_str, pt_11_str, pt_12_str, pt_13_str, pt_14_str, pt_15_str, pt_16_str, pt_17_str, pt_18_str, pt_19_str, pt_20_str, pt_21_str, pt_22_str, pt_23_str, pt_24_str, pt_25_str, pt_26_str, pt_27_str, pt_28_str, pt_29_str, pt_30_str, pt_31_str, pt_32_str, pt_33_str, pt_34_str, pt_35_str):
+def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt_3_str, pt_4_str, pt_5_str, pt_6_str, pt_7_str, pt_8_str, pt_9_str, pt_10_str, pt_11_str, pt_12_str, pt_13_str, pt_14_str, pt_15_str, pt_16_str, pt_17_str, pt_18_str, pt_19_str, pt_20_str, pt_21_str, pt_22_str, pt_23_str, pt_24_str, pt_25_str, pt_26_str, pt_27_str, pt_28_str, pt_29_str, pt_30_str, pt_31_str, pt_32_str, pt_33_str, pt_34_str, pt_35_str, pt_36_str, pt_37_str, pt_38_str, pt_39_str, pt_40_str, pt_41_str, pt_42_str, pt_43_str):
     """Changing mesh to not have the angle."""
 
     print("block mesh template path before writing")
@@ -278,6 +278,14 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write(pt_33_str+'\n')
             f.write(pt_34_str+'\n')
             f.write(pt_35_str+'\n')
+            f.write(pt_36_str+'\n')
+            f.write(pt_37_str+'\n')
+            f.write(pt_38_str+'\n')
+            f.write(pt_39_str+'\n')
+            f.write(pt_40_str+'\n')
+            f.write(pt_41_str+'\n')
+            f.write(pt_42_str+'\n')
+            f.write(pt_43_str+'\n')
 
             f.write("\n")
             f.write(");"+"\n")
@@ -288,16 +296,18 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
 
             num_cells_int_str_concat = "(5 5 5)" # going with this for now
 
-            f.write("hex (0 1 17 16 2 3 19 18) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (2 3 19 18 4 5 21 20) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (4 5 21 20 6 7 23 22) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (6 7 23 22 8 9 25 24) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (0 1 23 22 2 3 25 24) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (2 3 25 24 4 5 27 26) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (4 5 27 26 6 7 29 28) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (6 7 29 28 8 9 31 30) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
             #f.write("hex (6 6 22 22 10 8 24 26) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n") PREVIOUS PRYRAMID MESHES
             #f.write("hex (7 7 23 23 9 11 27 25) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (32 6 22 33 10 8 24 26) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (7 34 35 23 9 11 27 25) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (10 8 24 26 12 14 30 28) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
-            f.write("hex (9 11 27 25 15 13 29 31) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (10 6 28 32 12 8 30 34) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (7 11 33 29 9 13 35 31) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (14 10 32 36 16 12 34 38) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (11 15 37 33 13 17 39 35) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (16 12 34 38 18 20 42 40) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
+            f.write("hex (13 17 39 35 21 19 41 43) " + num_cells_int_str_concat + " " +   "simpleGrading (1 1 1)" + "\n")
 
             f.write(");" + "\n")
             f.write("\n")
@@ -318,7 +328,7 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write("type patch;" + "\n")
             f.write("faces" + "\n")
             f.write("(" + "\n")
-            f.write("(12 14 30 28)" + "\n")
+            f.write("(18 20 42 40)" + "\n")
             f.write(");" + "\n")
             f.write("}" + "\n")
 
@@ -328,7 +338,7 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write("type patch;" + "\n")
             f.write("faces" + "\n")
             f.write("(" + "\n")
-            f.write("(15 13 29 31)" + "\n")
+            f.write("(21 19 41 43)" + "\n")
             f.write(");" + "\n")
             f.write("}" + "\n")
 
@@ -338,7 +348,7 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write("type patch;" + "\n")
             f.write("faces" + "\n")
             f.write("(" + "\n")
-            f.write("(3 19 21 5)" + "\n")
+            f.write("(3 25 27 5)" + "\n")
             f.write(");" + "\n")
             f.write("}" + "\n")
 
@@ -348,7 +358,7 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write("type patch;" + "\n")
             f.write("faces" + "\n")
             f.write("(" + "\n")
-            f.write("(2 18 20 4)" + "\n")
+            f.write("(2 24 26 4)" + "\n")
             f.write(");" + "\n")
             f.write("}" + "\n")
 
@@ -358,34 +368,52 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write("type patch;" + "\n")
             f.write("faces" + "\n")
             f.write("(" + "\n")
-            f.write("(0 1 17 16)" + "\n")
+            f.write("(0 1 23 22)" + "\n")
             f.write(");" + "\n")
             f.write("}" + "\n")
 
             #Stove Body
             f.write("stove_body" + "\n")
             f.write("{"+"\n")
-            f.write("type patch;" + "\n")
+            f.write("type wall;" + "\n")
             f.write("faces" + "\n")
             f.write("(" + "\n")
-            f.write("(0 16 18 2)" + "\n")
-            f.write("(1 17 19 3)" + "\n")
-            f.write("(4 20 22 6)" + "\n")
-            f.write("(5 21 23 7)" + "\n")
+            f.write("(0 22 24 2)" + "\n")
+            f.write("(1 23 25 3)" + "\n")
+            f.write("(4 26 28 6)" + "\n")
+            f.write("(5 27 29 7)" + "\n")
             #f.write("(6 22 22 6)" + "\n") old walls from pyramid mesh
             #f.write("(7 23 23 7)" + "\n")
-            f.write("(32 6 22 33)" + "\n")
-            f.write("(32 33 26 10)" + "\n")
-            f.write("(7 34 35 23)" + "\n")
-            f.write("(34 35 27 11)" + "\n")
+            f.write("(10 6 28 32)" + "\n")
+            f.write("(7 11 33 29)" + "\n")
+            f.write("(14 10 32 36)" + "\n")
+            f.write("(11 15 37 33)" + "\n")
 
-            f.write("(11 27 29 13)" + "\n")
-            f.write("(9 25 31 15)" + "\n")
-            f.write("(8 24 30 14)" + "\n")
-            f.write("(10 26 28 12)" + "\n")
-            f.write("(8 9 25 24)" + "\n")
+            f.write("(14 36 38 16)" + "\n")
+            f.write("(15 37 39 17)" + "\n")
+            f.write("(16 38 40 18)" + "\n")
+            f.write("(17 39 41 19)" + "\n")
             f.write(");" + "\n")
             f.write("}" + "\n")
+
+            #pot_surfaces
+            f.write("pot_surfaces" + "\n")
+            f.write("{"+"\n")
+            f.write("type wall;" + "\n")
+            f.write("faces" + "\n")
+            f.write("(" + "\n")
+            f.write("(12 34 42 20)" + "\n")
+            f.write("(12 8 30 34)" + "\n")
+            f.write("(8 9 31 30)" + "\n")
+            f.write("(9 13 35 31)" + "\n")
+            f.write("(13 35 43 21)" + "\n")
+            f.write(");" + "\n")
+            f.write("}" + "\n")
+
+
+
+
+
 
             #Empty front and back faces
             f.write("\n")
@@ -395,21 +423,27 @@ def write_blockmesh_2(block_mesh_template_path, pt_0_str, pt_1_str, pt_2_str, pt
             f.write("faces" + "\n")
             f.write("(" + "\n")
             f.write("(0 1 3 2)" + "\n")
-            f.write("(16 17 19 18)" + "\n")
-            f.write("(2 3 5 4)" + "\n")
-            f.write("(18 19 21 20)" + "\n")
-            f.write("(4 5 7 6)" + "\n")
-            f.write("(20 21 23 22)" + "\n")
-            f.write("(6 7 9 8)" + "\n")
             f.write("(22 23 25 24)" + "\n")
-            #f.write("(10 6 8 10)" + "\n")
-            #f.write("(26 22 24 26)" + "\n")
-            #f.write("(7 11 9 7)" + "\n")
-            #f.write("(23 27 25 23)" + "\n")
-            f.write("(10 8 14 12)" + "\n")
-            f.write("(26 24 30 28)" + "\n")
-            f.write("(9 11 13 15)" + "\n")
-            f.write("(25 27 29 31)" + "\n")
+            f.write("(2 3 5 4)" + "\n")
+            f.write("(24 25 27 26)" + "\n")
+            f.write("(4 5 7 6)" + "\n")
+            f.write("(26 27 29 28)" + "\n")
+            f.write("(6 7 9 8)" + "\n")
+            f.write("(28 29 31 30)" + "\n")
+            f.write("(10 6 8 12)" + "\n")
+            f.write("(32 28 30 34)" + "\n")
+            f.write("(7 11 13 9)" + "\n")
+            f.write("(29 33 35 31)" + "\n")
+            f.write("(14 10 12 16)" + "\n")
+            f.write("(36 32 34 38)" + "\n")
+            f.write("(11 15 17 13)" + "\n")
+            f.write("(33 37 39 35)" + "\n")
+
+            f.write("(16 12 20 18)" + "\n")
+            f.write("(38 34 42 40)" + "\n")
+            f.write("(13 17 19 21)" + "\n")
+            f.write("(35 39 41 43)" + "\n")
+
 
             f.write(");" + "\n")
             f.write("}" + "\n")

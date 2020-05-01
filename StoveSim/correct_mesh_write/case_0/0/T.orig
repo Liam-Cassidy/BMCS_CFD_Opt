@@ -24,7 +24,7 @@ boundaryField
     primary_inlet
     {
         type            fixedValue;
-        value           uniform 600;
+        value           uniform 900;
     }
 	secondary_air_LHS
     {
@@ -54,7 +54,7 @@ boundaryField
         type            externalWallHeatFluxTemperature;
 		mode			coefficient;
 		Ta				constant 300;
-		h				uniform 10;
+		h				uniform 5;
 		thicknessLayers	(0.1 0.2 0.3 0.4);
 		kappaLayers		(1 2 3 4);
 		kappaMethod		fluidThermo;
@@ -62,17 +62,10 @@ boundaryField
 		
     }
 	
-	pot_surfaces //adapted from OpenFOAM-6 github repo
+	pot_surfaces
     {
-        type            externalWallHeatFluxTemperature;
-		mode			flux;
-		q				uniform 22000; // W/m2-K
-		value			$internalField;
-		thicknessLayers	(0.1 0.2 0.3 0.4);
-		kappaLayers		(1 2 3 4);
-		kappaMethod		fluidThermo;
-		value			$internalField;
-		
+        type        fixedValue;
+		value       373.15; // saturation temperature in K.
     }
 }
 
